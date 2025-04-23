@@ -1,0 +1,26 @@
+.header {
+    background: linear-gradient(to right, #1a9f2e, #a2a6ab); /* blue gradient */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px; /* match SearchContainer height */
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* padding: 1rem; */
+  }
+  
+  .header h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  @media (min-width: 640px) {
+    .header h1 {
+      font-size: 2rem;
+    }
+  }
+  
