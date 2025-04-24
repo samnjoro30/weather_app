@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\weatherDay;
 use App\Http\Controllers\ForecastController;
+use App\Http\Controllers\GeocodingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/current', [WeatherController::class, 'current']);
 Route::get('/weather', [weatherDay::class, 'getWeather']);
 Route::get('/forecast', [ForecastController::class, 'getForecast']);
+Route::get('/location', [GeocodingController::class, 'search']);
