@@ -27,13 +27,12 @@ To get started with the project, clone this repository and install the required 
 2. Navigate into the project directory:
    ```bash
    cd .. to your directory of the cloned project
+   npm run dev
+   php artisan serve
 3.usage
- open the client folder and back-end in the terminal and run 
-   ```
-  npm run dev
-  php artisan serve
+This will start the development server at http://localhost:3000. Open the URL in your browser to see the weather app in action.
 
-Key Features
+🌟 Key Features
 The weather sidebar displays current weather data, including temperature, condition, and icon.
 
 Forecasts and weather stats are presented for upcoming days.
@@ -41,4 +40,3 @@ Forecasts and weather stats are presented for upcoming days.
 The search container allows the user to search for specific locations.
 
 The app is responsive and adapts to different screen sizes (desktop, tablet, and mobile).
-
