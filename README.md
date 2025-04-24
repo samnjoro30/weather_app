@@ -1,29 +1,31 @@
-Weather Updates App
+# Weather Updates App
+
 A modern and responsive weather application that provides real-time weather updates based on location. The app features a weather sidebar, detailed forecasts, weather stats, and a clean, professional design.
 
-Features
-Real-Time Weather Updates: Displays current weather conditions, temperature, and location.
+## Features
+- **Real-Time Weather Updates**: Displays current weather conditions, temperature, and location.
+- **Unit Toggle**: Users can switch between Celsius and Fahrenheit for temperature.
+- **Responsive Design**: Optimized for both desktop and mobile viewports.
+- **Weather Forecasts**: Provides detailed forecasts for upcoming weather.
+- **Professional UI**: Clean and modern interface with smooth animations.
 
-Unit Toggle: Users can switch between Celsius and Fahrenheit for temperature.
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Folder Structure](#folder-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-Responsive Design: Optimized for both desktop and mobile viewports.
+## Installation
 
-Weather Forecasts: Provides detailed forecasts for upcoming weather.
-
-Professional UI: Clean and modern interface with smooth animations.
-
-Table of Contents
-Installation
-
-Usage
-
-Folder Structure
-
-Contributing
-
-License
-
-Installation
 To get started with the project, clone this repository and install the required dependencies.
 
-Clone the repository:
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/samnjoro30/weather-updates-app.git
+2. Navigate into the project directory:
+   ```bash
+   cd .. to your directory of the cloned project
+3.usage
+   ```
