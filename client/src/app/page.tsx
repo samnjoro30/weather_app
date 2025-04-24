@@ -4,44 +4,30 @@ import Header from "./components/header";
 import WeatherSidebar from "./weather/sidebar";
 import Forecast from "./weather/forecast";
 import WeatherStats from "./weather/stats";
+import Footer from "./components/footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-       <Header /> 
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-sky-100 via-blue-200 to-cyan-100">
+      <Header />
 
-      {/* Main Content Section */}
-      <main className="flex flex-col lg:flex-row justify-center items-start gap-6 px-6 sm:px-12 mt-6">
-        
-        {/* Sidebar: Current Weather Details */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-4 shadow-md text-white">
-          <WeatherSidebar />
-        </div>
+      <main className="px-4 md:px-6 py-4 max-w-6xl mx-auto space-y-6">
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Sidebar on the left */}
+          <div className="lg:w-1/3 w-full">
+            <WeatherSidebar />
+          </div>
 
-        {/* Right Section */}
-        <div className="flex-1 space-y-6">
-          
-          {/* Search Box */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-4 shadow-md text-white">
+          {/* Main content stack */}
+          <div className="flex flex-col gap-6 flex-1">
             <SearchContainer />
-          </div>
-
-          {/* 3-Day Forecast */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-4 shadow-md text-white">
             <Forecast />
-          </div>
-
-          {/* Weather Stats (Wind + Humidity) */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> */}
-            <div className="bg-white p-4 rounded-xl shadow-md">
-              <WeatherStats  />
+            <WeatherStats />
             
-           
           </div>
-          
         </div>
       </main>
+      <Footer/>
     </div>
   );
 }

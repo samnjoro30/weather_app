@@ -113,16 +113,23 @@ export default function WeatherStats() {
   }
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 w-full max-w-lg mx-auto">
+    // <div className="bg-gray-800/60 text-white backdrop-blur-sm rounded-xl shadow-lg p-8 w-full max-w-lg mx-auto">
+    <div className="bg-cyan-50/70 backdrop-blur-sm border border-cyan-100 rounded-xl shadow-lg p-6 w-full max-w-4xl mx-auto min-h-[280px]">
+
+    {/* <div className="bg-gradient-to-br from-white/70 to-blue-50/60 backdrop-blur-md rounded-xl shadow-lg p-8 w-full max-w-lg mx-auto"> */}
+
       {/* Weather Stats Title - optional */}
       <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">
         Weather Details
       </h2>
 
       {/* Two distinct containers with increased gap */}
+      
       <div className="grid grid-cols-2 gap-6">
         {/* Wind Container */}
-        <div className="bg-blue-50/50 rounded-xl p-6 border border-blue-100 h-full min-h-[180px]">
+        {/* <div className="bg-blue-50/50 rounded-xl p-6 border border-blue-100 h-full min-h-[180px]"> */}
+        <div className="bg-white rounded-xl p-6 shadow-md h-full min-h-[180px] w-full">
+
           <div className="flex flex-col items-center h-full justify-between">
             <div className="flex items-center mb-3">
               <svg 
@@ -151,7 +158,8 @@ export default function WeatherStats() {
         </div>
         
         {/* Humidity Container */}
-        <div className="bg-teal-50/50 rounded-xl p-6 border border-teal-100 h-full min-h-[180px]">
+        {/* <div className="bg-teal-50/50 rounded-xl p-6 border border-teal-100 h-full min-h-[180px]"> */}
+        <div className="bg-white rounded-xl p-6 shadow-md h-full min-h-[180px] w-full">
           <div className="flex flex-col items-center h-full justify-between">
             <div className="flex items-center mb-3">
               <svg 

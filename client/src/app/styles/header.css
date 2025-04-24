@@ -1,26 +1,52 @@
 .header {
-    background: linear-gradient(to right, #1a9f2e, #a2a6ab); /* blue gradient */
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100px; /* match SearchContainer height */
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    /* padding: 1rem; */
+  background: linear-gradient(to right, #1488cc, #2b32b2); /* fresh blue gradient */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 110px;
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .header-content {
+    flex-direction: row;
   }
-  
+}
+
+.header h1 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 640px) {
   .header h1 {
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin: 0;
+    font-size: 2.25rem;
   }
-  
-  @media (min-width: 640px) {
-    .header h1 {
-      font-size: 2rem;
-    }
-  }
-  
+}
+
+.icon-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  color: white;
+  opacity: 0.9;
+}

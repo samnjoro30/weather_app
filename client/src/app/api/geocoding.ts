@@ -6,16 +6,19 @@ export interface GeoLocation {
   state?: string
 }
 
-const API_KEY = 'YOUR_API_KEY' // 🔐 Replace this with your OpenWeatherMap API key
-
 export async function searchCity(query: string): Promise<GeoLocation[]> {
-  const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=1&appid=${API_KEY}`
+  const url = `http://localhost:8000/api/location?query=${encodeURIComponent(query)}`;
 
-  const res = await fetch(url)
-  if (!res.ok) {
-    throw new Error(`Failed to fetch geocoding data: ${res.statusText}`)
+  try {
+    const res = await fetch(url)
+    if (!res.ok) {
+      const message = await res.text()
+      throw new Error(`Error ${res.status}: ${res.statusText} - ${message}`)
+    }
+
+    return await res.json()
+  } catch (err: any) {
+    console.error('Fetch error:', err.message)
+    throw err
   }
-
-  const data = await res.json()
-  return data as GeoLocation[]
 }

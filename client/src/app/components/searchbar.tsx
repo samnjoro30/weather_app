@@ -32,7 +32,7 @@ export default function SearchBar({
           rounded-md border border-gray-300
           focus:outline-none focus:ring-2 focus:ring-blue-500
           shadow-sm transition-all duration-200
-          text-sm sm:text-base
+          text-sm sm:text-base text-black
           disabled:bg-gray-100 disabled:cursor-not-allowed
         `}
       />

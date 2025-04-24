@@ -101,10 +101,12 @@ export default function WeatherSidebar() {
   }
 
   return (
-    <div className="w-full bg-white/90 shadow-lg rounded-2xl overflow-hidden min-w-[320px] max-w-md lg:max-w-lg  min-h-[450px] h-[65vh] max-h-[800px]">
-      {/* Current Weather Section */}
-      <div className="p-8 flex flex-col items-center">
-        {/* Weather Icon - Larger */}
+    <div className="w-full bg-cyan-50/70 backdrop-blur-sm border border-cyan-100 shadow-lg rounded-2xl overflow-hidden min-w-[320px] max-w-md lg:max-w-lg mx-auto 
+      h-[calc(100vh-4rem)] my-8">
+      
+      {/* Main content wrapper */}
+      <div className="p-8 flex flex-col items-center h-full">
+        {/* Weather Icon */}
         <div className="mb-6 w-28 h-28 relative">
           <Image
             src={weather.icon}
@@ -114,8 +116,8 @@ export default function WeatherSidebar() {
             unoptimized
           />
         </div>
-        
-        {/* Temperature with Unit Toggle - Enhanced */}
+  
+        {/* Temperature and toggle */}
         <div className="flex items-center mb-4">
           <span className="text-6xl font-bold text-gray-800">
             {convertTemp(weather.temperature)}
@@ -127,23 +129,20 @@ export default function WeatherSidebar() {
             °{unit}
           </button>
         </div>
-        
-        {/* Weather Condition - Larger */}
+  
+        {/* Condition */}
         <p className="text-xl font-medium text-gray-600 capitalize mb-6">
           {weather.condition.toLowerCase()}
         </p>
-        
-        {/* Date and Location - Enhanced */}
-        <div className="w-full text-center border-t border-gray-100 pt-6">
+  
+        {/* Spacer pushes content below to bottom */}
+        <div className="w-full text-center border-t border-gray-100 pt-6 mt-auto">
           <p className="text-base text-gray-500 mb-2">{weather.date}</p>
           <p className="text-lg font-medium text-gray-700">
             {weather.location}
-            {weather.auto_detected && (
-              <span className="text-sm text-gray-400 ml-2">(your location)</span>
-            )}
           </p>
         </div>
       </div>
     </div>
   )
-}
+  }  

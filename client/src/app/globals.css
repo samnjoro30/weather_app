@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #190f0f;
-  --foreground: #ada6a6;
+  --background: #f8fafc;  /* A light neutral background */
+  --foreground: rgb(181, 183, 187);  /* A dark slate for text */
+  --primary: #0ea5e9;     /* A vibrant cyan/sky color */
+  --secondary: #7dd3fc;  /* Lighter cyan for accents */
+  --accent: #0369a1;  
 }
 
 @theme inline {
@@ -33,7 +36,7 @@ body {
 /* Dark Mode */
  @media (prefers-color-scheme: dark) {
   :root {
-    --background: linear-gradient(135deg, #1e1e2f, #2a2a40, #12121a);
+    --background: #f8fafc;
     --foreground: #ededed;
   }
 } 

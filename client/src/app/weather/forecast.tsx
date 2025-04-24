@@ -110,27 +110,27 @@ export default function Forecast() {
   }
 
   return (
-    <div className="forecast-container">
-      <div className="flex gap-4 w-full justify-center flex-wrap">
-        {forecast.map((day, index) => (
+    <div className="bg-cyan-50/70 backdrop-blur-sm border border-cyan-100 rounded-xl shadow-lg p-6 w-full max-w-6xl mx-auto min-h-[200px]">
+      <div className="flex flex-col md:flex-row justify-center items-center md:items-stretch gap-6 w-full px-4">
+        {forecast.slice(0, 3).map((day, index) => (
           <div
             key={index}
-            className="flex flex-col items-center bg-white rounded-xl shadow-sm p-4 w-32 hover:shadow-md transition-shadow"
+            className="flex flex-col items-center bg-white rounded-xl shadow-sm p-4 min-h-[200px] w-full max-w-[250px] hover:shadow-md transition-shadow"
           >
-            <p className="text-sm font-medium text-gray-700">{day.date}</p>
+            <p className="text-sm font-semibold text-gray-800">{day.date}</p>
             <Image 
               src={day.icon} 
               alt="weather icon" 
-              width={50} 
-              height={50}
-              unoptimized // Weather API icons might not support optimization
+              width={60} 
+              height={60}
+              unoptimized
+              className="my-3"
             />
-            <p className="text-xs text-gray-500">
-              {day.min}° - {day.max}°C
-            </p>
+            <p className="text-sm text-gray-600">{day.min}° / {day.max}°C</p>
           </div>
         ))}
       </div>
     </div>
-  )
+  );
+  
 }
