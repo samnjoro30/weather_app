@@ -20,20 +20,25 @@ export default function WeatherStats() {
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [hasFetched, setHasFetched] = useState(false)
 
   useEffect(() => {
+    if (hasFetched) return
     const fetchWeatherData = async (lat: number, lon: number) => {
       try {
         setLoading(true)
         setError(null)
         
         const response = await fetch(`http://localhost:8000/api/current?lat=${lat}&lon=${lon}`)
+
+        
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
         
         const data = await response.json()
+        console.log("data", data)
         
         if (data.error) {
           throw new Error(data.error)
@@ -41,6 +46,7 @@ export default function WeatherStats() {
         
         setStats(data.weather)
         setLocation(data.location)
+        setHasFetched(true)
       } catch (err) {
         console.error('Failed to fetch weather data:', err)
         setError(err instanceof Error ? err.message : 'Unknown error occurred')
@@ -70,7 +76,7 @@ export default function WeatherStats() {
     }
 
     handleGeolocation()
-  }, [])
+  }, [hasFetched])
 
   if (loading) {
     return (
@@ -107,31 +113,71 @@ export default function WeatherStats() {
   }
 
   return (
-    <div className="bg-white shadow-md rounded-2xl p-6 w-full max-w-3xl mx-auto mt-6">
-      <h2 className="text-lg font-semibold text-gray-800 mb-4 text-center">
-        Weather Details — {location.name}, {location.country}
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 w-full max-w-lg mx-auto">
+      {/* Weather Stats Title - optional */}
+      <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">
+        Weather Details
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div className="bg-gray-50 rounded-xl p-5 shadow-inner flex flex-col items-center">
-          <p className="text-sm font-medium text-gray-600 mb-1">Wind Status</p>
-          <p className="text-3xl font-bold text-gray-800">
-            {stats.wind_speed.toFixed(1)} km/h
-          </p>
-          <p className="text-xs text-gray-500 mt-1">
-            Direction: {getWindDirection(stats.wind_direction)}
-          </p>
+      {/* Two distinct containers with increased gap */}
+      <div className="grid grid-cols-2 gap-6">
+        {/* Wind Container */}
+        <div className="bg-blue-50/50 rounded-xl p-6 border border-blue-100 h-full min-h-[180px]">
+          <div className="flex flex-col items-center h-full justify-between">
+            <div className="flex items-center mb-3">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="w-6 h-6 text-blue-500 mr-2" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M12 19l-3 3m0 0l-3-3m3 3V11m0-4a4 4 0 100-8 4 4 0 000 8z" 
+                />
+              </svg>
+              <span className="text-md font-medium text-blue-600">Wind</span>
+            </div>
+            <p className="text-3xl font-bold text-gray-800">
+              {stats.wind_speed.toFixed(1)} km/h
+            </p>
+            <div className="text-sm text-gray-500 mt-2">
+              Direction: {getWindDirection(stats.wind_direction)}
+            </div>
+          </div>
         </div>
-
-        <div className="bg-gray-50 rounded-xl p-5 shadow-inner flex flex-col items-center">
-          <p className="text-sm font-medium text-gray-600 mb-1">Humidity</p>
-          <p className="text-3xl font-bold text-gray-800">{stats.humidity}%</p>
-          <div className="w-full mt-3">
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-blue-500"
-                style={{ width: `${stats.humidity}%` }}
-              />
+        
+        {/* Humidity Container */}
+        <div className="bg-teal-50/50 rounded-xl p-6 border border-teal-100 h-full min-h-[180px]">
+          <div className="flex flex-col items-center h-full justify-between">
+            <div className="flex items-center mb-3">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="w-6 h-6 text-teal-500 mr-2" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" 
+                />
+              </svg>
+              <span className="text-md font-medium text-teal-600">Humidity</span>
+            </div>
+            <p className="text-3xl font-bold text-gray-800">{stats.humidity}%</p>
+            <div className="w-full mt-3 px-2">
+              <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-teal-500" 
+                  style={{ width: `${stats.humidity}%` }} 
+                />
+              </div>
             </div>
           </div>
         </div>

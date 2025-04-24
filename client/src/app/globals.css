@@ -38,30 +38,4 @@ body {
   }
 } 
 
-/* body {
-  background: var(--background);
-  background-attachment: fixed;
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-  color: var(--foreground);
-  transition: background 0.5s ease, color 0.3s ease;
-}
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: linear-gradient(135deg, #141e30, #243b55, #1c1f2b);
-    --foreground: #f1f1f1;
-  }
-}
-.weather-container {
-  border-radius: 1rem;
-  background: linear-gradient(135deg, #e0f7ff, #ffffff);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-} */

@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
@@ -17,14 +16,13 @@ export default function WeatherSidebar() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  
+  const [unit, setUnit] = useState<'C' | 'F'>('C') // New state for temperature unit
 
   useEffect(() => {
     const fetchWeather = async (latitude?: number, longitude?: number) => {
       try {
         let url = 'http://localhost:8000/api/weather'
         
-        // If coordinates are available, add them as query params
         if (latitude && longitude) {
           url += `?lat=${latitude}&lon=${longitude}`
         }
@@ -45,7 +43,6 @@ export default function WeatherSidebar() {
       }
     }
 
-    // Try to get user's geolocation first
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -53,63 +50,99 @@ export default function WeatherSidebar() {
         },
         (error) => {
           console.warn('Geolocation error:', error)
-          // Fall back to IP-based location if geolocation fails
           fetchWeather()
         }
       )
     } else {
-      // Browser doesn't support geolocation, use IP-based location
       fetchWeather()
     }
   }, [])
 
+  const toggleUnit = () => {
+    setUnit(unit === 'C' ? 'F' : 'C')
+  }
+
+  const convertTemp = (temp: number) => {
+    return unit === 'F' ? (temp * 9/5 + 32).toFixed(1) : temp.toFixed(1)
+  }
+
   if (loading) {
     return (
-      <div className="w-full sm:w-1/3 max-w-sm flex justify-center items-center h-64 bg-white/90 shadow-md rounded-xl">
-        <p className="text-gray-500">Loading weather data...</p>
+      <div className="w-full sm:w-1/3 max-w-sm h-64 bg-white/90 shadow-lg rounded-2xl flex justify-center items-center">
+        <div className="animate-pulse flex flex-col items-center space-y-4">
+          <div className="h-20 w-20 bg-gray-200 rounded-full"></div>
+          <div className="h-8 w-24 bg-gray-200 rounded"></div>
+          <div className="h-4 w-32 bg-gray-200 rounded"></div>
+        </div>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="w-full sm:w-1/3 max-w-sm flex justify-center items-center h-64 bg-white/90 shadow-md rounded-xl">
-        <p className="text-red-500">{error}</p>
+      <div className="w-full sm:w-1/3 max-w-sm h-64 bg-white/90 shadow-lg rounded-2xl flex flex-col justify-center items-center p-6">
+        <p className="text-red-500 mb-4">{error}</p>
+        <button 
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+        >
+          Retry
+        </button>
       </div>
     )
   }
 
   if (!weather) {
     return (
-      <div className="w-full sm:w-1/3 max-w-sm flex justify-center items-center h-64 bg-white/90 shadow-md rounded-xl">
+      <div className="w-full sm:w-1/3 max-w-sm h-64 bg-white/90 shadow-lg rounded-2xl flex justify-center items-center">
         <p className="text-gray-500">Weather data unavailable</p>
       </div>
     )
   }
 
   return (
-    <div className="w-full sm:w-1/3 max-w-sm h-full flex flex-col justify-between items-center rounded-xl bg-white/90 shadow-md p-6">
-      <div className="mb-4">
-        <Image 
-          src={weather.icon} 
-          alt="Weather Icon" 
-          width={100} 
-          height={100} 
-          unoptimized // Weather API icons might not be optimized
-        />
-      </div>
-      <div className="text-4xl font-semibold text-gray-800">
-        {weather.temperature}°C
-      </div>
-      <div className="text-lg text-gray-600">{weather.condition}</div>
-      <div className="text-center mt-6 text-sm text-gray-500">
-        <p>{weather.date}</p>
-        <p className="font-medium">
-          {weather.location}
-          {weather.auto_detected && (
-            <span className="text-xs text-gray-400 ml-1">(your location)</span>
-          )}
+    <div className="w-full bg-white/90 shadow-lg rounded-2xl overflow-hidden min-w-[320px] max-w-md lg:max-w-lg  min-h-[450px] h-[65vh] max-h-[800px]">
+      {/* Current Weather Section */}
+      <div className="p-8 flex flex-col items-center">
+        {/* Weather Icon - Larger */}
+        <div className="mb-6 w-28 h-28 relative">
+          <Image
+            src={weather.icon}
+            alt={weather.condition}
+            fill
+            className="object-contain"
+            unoptimized
+          />
+        </div>
+        
+        {/* Temperature with Unit Toggle - Enhanced */}
+        <div className="flex items-center mb-4">
+          <span className="text-6xl font-bold text-gray-800">
+            {convertTemp(weather.temperature)}
+          </span>
+          <button 
+            onClick={toggleUnit}
+            className="ml-3 px-3 py-1.5 bg-gray-100 rounded-full text-base font-medium text-gray-600 hover:bg-gray-200 transition"
+          >
+            °{unit}
+          </button>
+        </div>
+        
+        {/* Weather Condition - Larger */}
+        <p className="text-xl font-medium text-gray-600 capitalize mb-6">
+          {weather.condition.toLowerCase()}
         </p>
+        
+        {/* Date and Location - Enhanced */}
+        <div className="w-full text-center border-t border-gray-100 pt-6">
+          <p className="text-base text-gray-500 mb-2">{weather.date}</p>
+          <p className="text-lg font-medium text-gray-700">
+            {weather.location}
+            {weather.auto_detected && (
+              <span className="text-sm text-gray-400 ml-2">(your location)</span>
+            )}
+          </p>
+        </div>
       </div>
     </div>
   )

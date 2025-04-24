@@ -35,9 +35,11 @@ export default function Forecast() {
                 
                 const data = await res.json();
                 // Convert object to array if needed
-                const forecastData = data && typeof data === 'object' 
-                  ? Object.values(data) 
-                  : [];
+                // const forecastData = data && typeof data === 'object' 
+                //   ? Object.values(data) 
+                //   : [];
+
+                  const forecastData = convertToForecastArray(data)
                 setForecast(forecastData);
               } catch (err) {
                 console.error('Geolocation fetch error:', err);
@@ -67,9 +69,10 @@ export default function Forecast() {
         
         const data = await res.json();
         // Convert object to array if needed
-        const forecastData = data && typeof data === 'object' 
-          ? Object.values(data) 
-          : [];
+        // const forecastData = data && typeof data === 'object' 
+        //   ? Object.values(data) 
+        //   : [];
+          const forecastData = convertToForecastArray(data);
         setForecast(forecastData);
       } catch (err) {
         console.error('Default fetch error:', err);
@@ -81,6 +84,22 @@ export default function Forecast() {
   
     fetchForecast();
   }, [location]);
+  const convertToForecastArray = (data: unknown): ForecastItem[] => {
+    if (!data || typeof data !== 'object') return [];
+    
+    try {
+      const values = Object.values(data);
+      return values.filter((item): item is ForecastItem => (
+        typeof item === 'object' && item !== null &&
+        'date' in item && typeof item.date === 'string' &&
+        'min' in item && typeof item.min === 'number' &&
+        'max' in item && typeof item.max === 'number' &&
+        'icon' in item && typeof item.icon === 'string'
+      ));
+    } catch {
+      return [];
+    }
+  };
 
   if (loading) {
     return <div className="text-center py-8">Loading forecast...</div>
