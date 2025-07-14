@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;  /* A light neutral background */
+  --background: #40464c;  /* A light neutral background */
   --foreground: rgb(181, 183, 187);  /* A dark slate for text */
   --primary: #0ea5e9;     /* A vibrant cyan/sky color */
   --secondary: #7dd3fc;  /* Lighter cyan for accents */
@@ -36,7 +36,7 @@ body {
 /* Dark Mode */
  @media (prefers-color-scheme: dark) {
   :root {
-    --background: #f8fafc;
+    --background: white;
     --foreground: #ededed;
   }
 } 
