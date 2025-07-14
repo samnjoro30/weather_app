@@ -13,7 +13,7 @@ interface ForecastItem {
 
 export default function Forecast() {
   const [forecast, setForecast] = useState<ForecastItem[]>([])
-  const [location, setLocation] = useState('Nairobi')
+  const location = useState('Nairobi')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string|null>(null)
 

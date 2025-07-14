@@ -17,8 +17,9 @@ export async function searchCity(query: string): Promise<GeoLocation[]> {
     }
 
     return await res.json()
-  } catch (err: any) {
-    console.error('Fetch error:', err.message)
-    throw err
+  } catch (err) {
+    const error = err instanceof Error ? err : new Error(String(err));
+    console.error('Fetch error:', error.message)
+    throw error;
   }
 }

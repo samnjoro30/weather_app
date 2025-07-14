@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 interface UnitToggleProps {
   unit: 'metric' | 'imperial'
   onToggle: (unit: 'metric' | 'imperial') => void

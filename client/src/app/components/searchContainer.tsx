@@ -28,8 +28,9 @@ export default function SearchContainer() {
     try {
       const results = await searchCity(query)
       setLocations(results)
-    } catch (err: any) {
-      setError(err.message || 'Failed to search location')
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err)); 
+      setError(error.message || 'Failed to search location')
     } finally {
       setIsSearching(false)
     }

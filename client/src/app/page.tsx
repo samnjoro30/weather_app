@@ -1,4 +1,3 @@
-import Image from "next/image";
 import SearchContainer from "./components/searchContainer";
 import Header from "./components/header";
 import WeatherSidebar from "./weather/sidebar";
