@@ -1,6 +1,6 @@
 import rippleui from 'rippleui';
 
-export default {
+const config =  {
     content: [
       "./app/api/**/*.{js,ts,jsx,tsx}",
       "./app/components/**/*.{js,ts,jsx,tsx}",
@@ -10,3 +10,4 @@ export default {
     plugins: [ rippleui ],
   }
   
+  export default config;

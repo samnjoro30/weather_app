@@ -84,7 +84,7 @@ export default function Forecast() {
   
     fetchForecast();
   }, [location]);
-  const convertToForecastArray = (data: any): ForecastItem[] => {
+  const convertToForecastArray = (data: unknown): ForecastItem[] => {
     if (!data || typeof data !== 'object') return [];
     
     try {
